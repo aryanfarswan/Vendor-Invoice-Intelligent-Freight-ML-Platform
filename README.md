@@ -11,6 +11,10 @@ The project is designed with a **modular application architecture**, separating 
 
 ---
 
+## 🚀 Live Demo
+
+[Open the deployed application](https://vendor-invoice-platform.streamlit.app/)
+
 ## Project Overview
 
 Vendor invoice processing can involve significant manual effort when estimating expected freight expenses and identifying invoices that may contain unusual cost or quantity patterns.
