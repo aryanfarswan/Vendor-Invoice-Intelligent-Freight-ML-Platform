@@ -6,6 +6,8 @@ from data_preprocessing import (
 )
 from modeling_evaluation import train_random_forest, evaluate_classifier
 import joblib
+from pathlib import Path
+
 
 features = [
     'Invoice_quantity', 'Invoice_Dollars','Freight', 'total_item_quantity', 'total_item_dollars'
@@ -17,11 +19,14 @@ def main():
     #Load data
     df=load_invoice_data()
     df = apply_labels(df)
-
+    
+    model_dir = Path(r"D:\\Projects\\Mlprojects\Invoice Intelligent system\\models")
+    model_dir.mkdir(parents=True, exist_ok=True)
+    
     #prepare data
     X_train, X_test, y_train, y_test = split_data(df, features, target)
     X_train_scaled, X_test_scaled =scale_features(
-        X_train, X_test, '../models/scaler.pkl'
+        X_train, X_test, 'D:\\Projects\\Mlprojects\\Invoice Intelligent system\\models\\scaler.pkl'
     )
 
     #train and evaluate model
@@ -35,7 +40,8 @@ def main():
     )
 
     #save the best model
-    joblib.dump(grid_search.best_estimator_, '../models/predict_flag_invoice.pkl')
+    model_path = model_dir / "predict_flag_invoice.pkl"
+    joblib.dump(grid_search.best_estimator_, model_path)
 
 if __name__ =='__main__':
     main()
